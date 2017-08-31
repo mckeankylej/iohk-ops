@@ -4,13 +4,12 @@ args:
     contents: '35.156.156.28'
   systemStart:
     tag: NixInt
-    contents: 1504019546
+    contents: 1504190174
   accessKeyId:
     tag: NixStr
     contents: iohk
 gen-cmdline: template -c csl-1583.yaml --environment development --nixops /nix/store/mb4rfbkliwjvcdcnqzgg4bgi45i8pb3s-nixops-1.6pre0_abcdef/bin/nixops
 environment: Development
-nixpkgs: 9b948ea439ddbaa26740ce35543e7e35d2aa6d18
 topology: topology-csl-1583.yaml
 name: csl-1583
 files:
