@@ -9,24 +9,24 @@ nodes:
     type: core
     region: eu-west-1
     static-routes: [["a1","c1","d1"], ["r"]]
-    addr: b1.cardano
+    host: b1.cardano
     port: 3000
   'c1':
     type: core
     region: us-west-1
     static-routes: [["a1","b1","d1"], ["r"]]
-    addr: c1.cardano
+    host: c1.cardano
     port: 3000
   'd1':
     type: core
     region: us-west-1
     static-routes: [["a1","b1","c1"], ["r"]]
-    addr: d1.cardano
+    host: d1.cardano
     port: 3000
 
   'r':
     type: relay
     region: eu-central-1
     static-routes: [["a1"], ["b1"], ["c1"], ["d1"]]
-    addr: r.cardano
+    host: r.cardano
     port: 3000
