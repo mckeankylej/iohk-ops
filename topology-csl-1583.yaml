@@ -2,25 +2,25 @@ nodes:
   'a1':
     type: core
     region: eu-central-1
-    static-routes: [["b1","c1","d1"], ["r"]]
+    static-routes: [["b1"],["c1"],["d1"], ["r"]]
     host: a1.cardano
     port: 3000
   'b1':
     type: core
     region: eu-west-1
-    static-routes: [["a1","c1","d1"], ["r"]]
+    static-routes: [["a1"],["c1"],["d1"], ["r"]]
     host: b1.cardano
     port: 3000
   'c1':
     type: core
     region: us-west-1
-    static-routes: [["a1","b1","d1"], ["r"]]
+    static-routes: [["a1"],["b1"],["d1"], ["r"]]
     host: c1.cardano
     port: 3000
   'd1':
     type: core
     region: us-west-1
-    static-routes: [["a1","b1","c1"], ["r"]]
+    static-routes: [["a1"],["b1"],["c1"], ["r"]]
     host: d1.cardano
     port: 3000
 
