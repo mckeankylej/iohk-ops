@@ -90,7 +90,7 @@ globals: imports: params:
         //
         ## XXX: Exhibit one:  code locality.
         (if ! params.typeIsExplorer
-         then { keyFile = globals.topologyYaml; }
+         then { keyFile = config.global.topologyYaml; }
          else { text    =
            let relayAddressSpecs =
              if globals.environment == "development"
