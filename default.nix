@@ -22,6 +22,27 @@ let
     gitrev = cardano-sl-src.rev;
     inherit enableDebugging enableProfiling;
   };
+  pkgs' = import pkgs.path { overlays = [ (pkgsself: pkgssuper: {
+    python27 = let
+      packageOverrides = self: super: {
+        botocore = super.botocore.override {
+          src =  pkgs.fetchFromGitHub {
+            owner = "boto";
+            repo = "botocore";
+            rev = "103604480adc361fc9e875504e739f622ea8ca5b"; # v1.5.95, last in 1.5 branch
+            sha256 = "1akrm4c848fzpi86aca7jb2kd3v14sf7x68h96b95fi76aisrdxc";
+          };};
+        boto3 = super.boto3.override {
+          src =  pkgs.fetchFromGitHub {
+            owner = "boto";
+            repo = "boto3";
+            rev = "25756f985b3f398aca71bc54d5ea95491bb11201"; # v1.4.5, same era as v1.5.95 of botocore
+            sha256 = "0q52xnjbpx6iawxhnn7ky2w5xz9bhsmd4v18r9ii748br5f3zwyi";
+          };
+          doCheck = false; };
+      };
+    in pkgssuper.python27.override {inherit packageOverrides;};
+  } ) ]; };
 in {
   nixops = 
     let
@@ -32,7 +53,7 @@ in {
         rev = "c06c0e79ab8d7a58d80b1c38b7ae4ed1a04322f0";
         sha256 = "1fly6ry7ksj7v5rl27jg5mnxdbjwn40kk47gplyvslpvijk65m4q";
       };
-    in (import "${nixopsUnstable}/release.nix" {}).build.${system};
+    in (import "${nixopsUnstable}/release.nix" { python2Packages = pkgs'.python2Packages; }).build.${system};
   iohk-ops = pkgs.haskell.lib.overrideCabal
              (compiler.callPackage ./iohk/default.nix {})
              (drv: {
