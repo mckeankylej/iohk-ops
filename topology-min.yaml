@@ -1,6 +1,6 @@
 nodes:
   'left':
-    type: relay
+    type: core
     region: eu-central-1
     zone:   eu-central-1b
     static-routes: [["right"]]
