@@ -10,7 +10,7 @@
       # mount unsets PATH when running this
       device = "/run/current-system/sw/bin/s3fs#${resources.s3Buckets.report-server-logs.name}";
       fsType = "fuse";
-      options = [ "_netdev" "allow_other" "iam_role" "nonempty" ];
+      options = [ "_netdev" "allow_other" "nonempty" ("iam_role=${resources.iamRoles.report-role.name}") ];
     };
     environment.systemPackages = [ pkgs.s3fs ];
   };
