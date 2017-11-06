@@ -73,9 +73,6 @@ let topologySpec     = builtins.fromJSON (builtins.readFile topologyFile);
     cores           = filter     (x: x.value.typeIsCore)              indexed;
     relays          = filter     (x: x.value.typeIsRelay)             indexed;
     nodeMap         = listToAttrs (cores ++ relays);
-    # WARNING: this depends on the sort order, as explained above.
-    firstRelay      = findFirst (x: x.value.typeIsRelay) ({ name = "fake-non-relay"; value = { type = "relay"; i = builtins.length indexed; }; }) indexed;
-    firstRelayIndex = firstRelay.value.i;
     nRelays         = length relays;
     ## Fuller map to include "other" nodes:
     ##
@@ -87,7 +84,7 @@ in
 {
   inherit topologyYaml;
   inherit cores relays nodeMap fullMap;
-  inherit nRelays firstRelayIndex;
+  inherit nRelays;
   inherit allRegions;
   inherit allOrgs defaultOrg;
   inherit orgXRegions;
